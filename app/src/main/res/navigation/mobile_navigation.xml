@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/graphe"
+            app:startDestination="@id/login">
+
+    <fragment android:id="@+id/login" android:name="com.example.myapplication.LoginFragment"
+              android:label="login" tools:layout="@layout/login_fragment"/>
+    <fragment android:id="@+id/register" android:name="com.example.myapplication.RegisterFragment"
+              android:label="register" tools:layout="@layout/register_fragment"/>
+    <fragment android:id="@+id/reinit" android:name="com.example.myapplication.ReinitFragment"
+              android:label="reinit" tools:layout="@layout/reinit_fragment"/>
+    <fragment android:id="@+id/commandes" android:name="com.example.myapplication.CommandesFragment"
+              android:label="Commandes" tools:layout="@layout/commandes_fragment"/>
+    <fragment android:id="@+id/commandesPharm"
+              android:name="com.example.myapplication.CommandesParPharmacieFragment"
+              android:label="Commandes_Pharm" tools:layout="@layout/commandes_par_pharmacie_fragment"/>
+    <fragment android:id="@+id/villes"
+              android:name="com.example.myapplication.Pharmacie_ville_fragment"
+              android:label="Villes" tools:layout="@layout/pharmacies_ville_fragment"/>
+    <fragment android:id="@+id/proximite" android:name="com.example.myapplication.ProximiteFragment"
+              android:label="Proximite" tools:layout="@layout/proximite_fragment"/>
+    <fragment android:id="@+id/creer_commande" android:name="com.example.myapplication.CreerCommandeFragment"
+              android:label="creer_commande" tools:layout="@layout/creer_commande_fragment"/>
+    <fragment android:id="@+id/pharmacie" android:name="com.example.myapplication.PharmacieFragment"
+              android:label="pharmacie" tools:layout="@layout/pharmacie_fragment"/>
+</navigation>
