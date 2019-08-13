@@ -7,20 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.Entity.Commande
 import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.Entity.User
+import com.example.myapplication.Identity.Identity
+import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.Server.RetrofitService
 import kotlinx.android.synthetic.main.login_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
-import java.util.*
+
 
 
 class LoginFragment : Fragment() {
 
+
+    var telField = ""
+    var passwordField = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,27 +39,53 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var commande = Commande(2,"0558979648",1,"frf", SimpleDateFormat("dd MMM yyyy").format(Date()),"etente")
-        addCommande.setOnClickListener{
+        LoginButton.setOnClickListener {
+            telField = phoneEdit.text.toString()
+            passwordField = passwordEdit.text.toString()
 
-            addCommande(commande)
+            if( checkField())
+                login()
         }
+    }
 
-        updateCommande.setOnClickListener{
+    private fun checkField(): Boolean {
 
-            commande.etat = "Prete"
-            updateCommande(commande)
-        }
+        // TODO check if fields are not empty, and display warnings if they are
+        return true
+    }
 
-        deleteCommande.setOnClickListener {
+    private fun login(){
 
-            deleteCommande(commande)
-        }
+        val call = RetrofitService.endpoint.login(telField, passwordField)
 
-        commandePharm.setOnClickListener {
+        call.enqueue(object : Callback<Identity> {
+            override fun onResponse(call: Call<Identity>?, response:
+            Response<Identity>?) {
 
-            getCommandeParPharmacie(1)
-        }
+                if(response?.isSuccessful!!) {
+                    MyIdentity.user = response.body()?.user
+                    MyIdentity.token = response.body()?.token
+                    // Go to commande activity
+                    Log.d("TOKEN",MyIdentity.token)
+                    Log.d("User",response.body().toString())
+                    if(MyIdentity.user?.toReinit != 1 )
+                       findNavController().navigate(R.id.action_login_to_reinit, null)
+                    else
+                       findNavController().navigate(R.id.action_login_to_commandes, null)
+
+                    Toast.makeText(this@LoginFragment.activity,"From isSuccessful", Toast.LENGTH_LONG).show()
+                }
+                else
+                {
+                    Log.d("NotSuccessful-response",response.message())
+                    Toast.makeText(this@LoginFragment.activity,"From Not Successful", Toast.LENGTH_LONG).show()
+                }
+            }
+            override fun onFailure(call: Call<Identity>?, t: Throwable?) {
+                Log.d("OnFailure",t.toString())
+                Toast.makeText(this@LoginFragment.activity, "From onFailure", Toast.LENGTH_LONG).show()
+            }})
+
     }
 
 
@@ -71,7 +103,7 @@ class LoginFragment : Fragment() {
 
                     if (list!!.size >= 1) {
 
-                        nom1.text = list.get(0)?.id.toString()
+                      /*  nom1.text = list.get(0)?.id.toString()
                         ville1.text = list.get(0)?.dateEmission
                         if (list.size >= 2 ) {
                             nom2.text = list.get(1)?.id.toString()
@@ -80,7 +112,7 @@ class LoginFragment : Fragment() {
                         else{
                             nom2.text = "Only one"
                             ville2.text = "Only one"
-                        }
+                        }*/
                     }
 
                 } else {
@@ -181,8 +213,8 @@ class LoginFragment : Fragment() {
 
                     if (list != null) {
                         if (list.size == 1){
-                            nom1.text = list.get(0)?.nom
-                            ville1.text = list.get(0)?.ville
+/*                            nom1.text = list.get(0)?.nom
+                            ville1.text = list.get(0)?.ville*/
                         }
                     }
 
@@ -208,8 +240,8 @@ class LoginFragment : Fragment() {
 
                 if (list != null) {
                     if (list.size == 1){
-                        nom1.text = list.get(0)?.nom
-                        ville1.text = list.get(0)?.ville
+  /*                      nom1.text = list.get(0)?.nom
+                        ville1.text = list.get(0)?.ville*/
                     }
                 }
 
@@ -235,10 +267,10 @@ class LoginFragment : Fragment() {
                         Log.d("OnResponse",response.body().toString())
                     }
                     val pharmacies: List<Pharmacie>? = response.body()
-                    nom1.text = pharmacies?.get(0)?.nom
+/*                    nom1.text = pharmacies?.get(0)?.nom
                     nom2.text = pharmacies?.get(1)?.nom
                     ville1.text = pharmacies?.get(0)?.ville
-                    ville2.text = pharmacies?.get(1)?.ville
+                    ville2.text = pharmacies?.get(1)?.ville*/
                 }
                 else {
 

@@ -8,7 +8,6 @@ data class User(
     var nss : Double,
     var nom : String,
     var prenom : String,
-    var mdp : String,
     var toReinit : Int,
     var adresse : String
 )

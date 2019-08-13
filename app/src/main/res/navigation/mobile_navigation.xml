@@ -5,23 +5,41 @@
             app:startDestination="@id/login">
 
     <fragment android:id="@+id/login" android:name="com.example.myapplication.LoginFragment"
-              android:label="login" tools:layout="@layout/login_fragment"/>
+              android:label="login" tools:layout="@layout/login_fragment">
+        <action android:id="@+id/action_login_to_register" app:destination="@id/register"/>
+        <action android:id="@+id/action_login_to_reinit" app:destination="@id/reinit"/>
+        <action android:id="@+id/action_login_to_commandes" app:destination="@id/commandes"/>
+        <action android:id="@+id/action_login_to_villes" app:destination="@id/villes"/>
+    </fragment>
     <fragment android:id="@+id/register" android:name="com.example.myapplication.RegisterFragment"
-              android:label="register" tools:layout="@layout/register_fragment"/>
+              android:label="register" tools:layout="@layout/register_fragment">
+        <action android:id="@+id/action_register_to_login" app:destination="@id/login"/>
+    </fragment>
     <fragment android:id="@+id/reinit" android:name="com.example.myapplication.ReinitFragment"
-              android:label="reinit" tools:layout="@layout/reinit_fragment"/>
+              android:label="reinit" tools:layout="@layout/reinit_fragment">
+        <action android:id="@+id/action_reinit_to_commandes" app:destination="@id/commandes"/>
+    </fragment>
     <fragment android:id="@+id/commandes" android:name="com.example.myapplication.CommandesFragment"
-              android:label="Commandes" tools:layout="@layout/commandes_fragment"/>
-    <fragment android:id="@+id/commandesPharm"
+              android:label="Commandes" tools:layout="@layout/commandes_fragment">
+        <action android:id="@+id/action_commandes_to_creer_commande" app:destination="@id/creer_commande"/>
+    </fragment>
+    <fragment android:id="@+id/commandes_pharm"
               android:name="com.example.myapplication.CommandesParPharmacieFragment"
-              android:label="Commandes_Pharm" tools:layout="@layout/commandes_par_pharmacie_fragment"/>
+              android:label="Commandes_Pharm" tools:layout="@layout/commandes_par_pharmacie_fragment">
+        <action android:id="@+id/action_commandesPharm_to_creer_commande" app:destination="@id/creer_commande"/>
+    </fragment>
     <fragment android:id="@+id/villes"
               android:name="com.example.myapplication.Pharmacie_ville_fragment"
-              android:label="Villes" tools:layout="@layout/pharmacies_ville_fragment"/>
+              android:label="Villes" tools:layout="@layout/pharmacies_ville_fragment">
+        <action android:id="@+id/action_villes_to_pharmacie" app:destination="@id/pharmacie"/>
+    </fragment>
     <fragment android:id="@+id/proximite" android:name="com.example.myapplication.ProximiteFragment"
               android:label="Proximite" tools:layout="@layout/proximite_fragment"/>
     <fragment android:id="@+id/creer_commande" android:name="com.example.myapplication.CreerCommandeFragment"
               android:label="creer_commande" tools:layout="@layout/creer_commande_fragment"/>
     <fragment android:id="@+id/pharmacie" android:name="com.example.myapplication.PharmacieFragment"
-              android:label="pharmacie" tools:layout="@layout/pharmacie_fragment"/>
+              android:label="pharmacie" tools:layout="@layout/pharmacie_fragment">
+        <action android:id="@+id/action_pharmacie_to_commandesPharm" app:destination="@id/commandes_pharm"/>
+        <action android:id="@+id/action_pharmacie_to_login" app:destination="@id/login"/>
+    </fragment>
 </navigation>

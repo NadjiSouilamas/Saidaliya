@@ -3,10 +3,14 @@ package com.example.myapplication.Server
 import com.example.myapplication.Entity.Commande
 import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.Entity.User
+import com.example.myapplication.Identity.Identity
 import retrofit2.Call
 import retrofit2.http.*
 
 interface Endpoint {
+
+    @POST("login")
+    fun login(@Query("tel") tel: String, @Query("mdp") mdp: String): Call<Identity>
 
     @POST("adduser")
     fun addUser(@Body user: User): Call<String>
