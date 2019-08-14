@@ -4,13 +4,21 @@ import com.example.myapplication.Entity.Commande
 import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.Entity.User
 import com.example.myapplication.Identity.Identity
+import com.example.myapplication.Identity.TelMdp
 import retrofit2.Call
 import retrofit2.http.*
 
 interface Endpoint {
 
     @POST("login")
-    fun login(@Query("tel") tel: String, @Query("mdp") mdp: String): Call<Identity>
+    fun login(@Body telmdp: TelMdp): Call<Identity>
+
+
+    @POST("loginorg")
+    fun loginORG(@Query("tel") tel: String, @Query("mdp") mdp: String): Call<Identity>
+
+    @POST("/reinit")
+    fun reinit(@Body telmdp: TelMdp): Call<String>
 
     @POST("adduser")
     fun addUser(@Body user: User): Call<String>

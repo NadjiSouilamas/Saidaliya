@@ -14,6 +14,7 @@ import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.Entity.User
 import com.example.myapplication.Identity.Identity
 import com.example.myapplication.Identity.MyIdentity
+import com.example.myapplication.Identity.TelMdp
 import com.example.myapplication.Server.RetrofitService
 import kotlinx.android.synthetic.main.login_fragment.*
 import retrofit2.Call
@@ -56,7 +57,7 @@ class LoginFragment : Fragment() {
 
     private fun login(){
 
-        val call = RetrofitService.endpoint.login(telField, passwordField)
+        val call = RetrofitService.endpoint.login(TelMdp(telField, passwordField))
 
         call.enqueue(object : Callback<Identity> {
             override fun onResponse(call: Call<Identity>?, response:
@@ -68,10 +69,10 @@ class LoginFragment : Fragment() {
                     // Go to commande activity
                     Log.d("TOKEN",MyIdentity.token)
                     Log.d("User",response.body().toString())
-                    if(MyIdentity.user?.toReinit != 1 )
-                       findNavController().navigate(R.id.action_login_to_reinit, null)
+                    if(MyIdentity.user?.toReinit == 0 )
+                        findNavController().navigate(R.id.action_login_to_commandes, null)
                     else
-                       findNavController().navigate(R.id.action_login_to_commandes, null)
+                        findNavController().navigate(R.id.action_login_to_reinit, null)
 
                     Toast.makeText(this@LoginFragment.activity,"From isSuccessful", Toast.LENGTH_LONG).show()
                 }
