@@ -11,6 +11,8 @@ import java.io.IOException
 
 object RetrofitService {
 
+    var adresse = "http://192.168.1.4:8082"
+    var imagesPharmacieAdresse = adresse+"/"
     val endpoint :Endpoint by lazy {
         // TODO : Put base URL
         val client = OkHttpClient.Builder()
@@ -21,7 +23,7 @@ object RetrofitService {
             it.proceed(newRequest.build())
         })
 
-        Retrofit.Builder().baseUrl("http://192.168.1.4:8082").
+        Retrofit.Builder().baseUrl(adresse).
             client(client.build()).
             addConverterFactory(GsonConverterFactory.create()).
             build().create(Endpoint::class.java)

@@ -23,6 +23,10 @@ interface Endpoint {
     @POST("adduser")
     fun addUser(@Body user: User): Call<String>
 
+    // TODO after authentication
+    @GET("/getCommandes")
+    fun getCommandes(): Call<List<Commande>>
+
     @GET("getpharmacies")
     fun getPharmacies(): Call<List<Pharmacie>>
 
@@ -44,7 +48,4 @@ interface Endpoint {
     @GET("/getcommandesparphar/{idphar}")
     fun getCommandesParPharmacie(@Path("idphar") idphar: Int): Call<List<Commande>>
 
-    // TODO after authentication
-    @GET("/getCommandes")
-    fun getCommandes()
 }

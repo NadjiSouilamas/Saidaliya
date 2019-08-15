@@ -47,6 +47,10 @@ class LoginFragment : Fragment() {
             if( checkField())
                 login()
         }
+
+        CreateAccountButton.setOnClickListener {
+            findNavController().navigate(R.id.action_login_to_register, null)
+        }
     }
 
     private fun checkField(): Boolean {
@@ -74,17 +78,17 @@ class LoginFragment : Fragment() {
                     else
                         findNavController().navigate(R.id.action_login_to_reinit, null)
 
-                    Toast.makeText(this@LoginFragment.activity,"From isSuccessful", Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this@LoginFragment.activity,"From isSuccessful", Toast.LENGTH_LONG).show()
                 }
                 else
                 {
                     Log.d("NotSuccessful-response",response.message())
-                    Toast.makeText(this@LoginFragment.activity,"From Not Successful", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginFragment.activity,"Téléphone ou mot de passe incorrects", Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(call: Call<Identity>?, t: Throwable?) {
-                Log.d("OnFailure",t.toString())
-                Toast.makeText(this@LoginFragment.activity, "From onFailure", Toast.LENGTH_LONG).show()
+                Log.d("MyLog",t.toString())
+                Toast.makeText(this@LoginFragment.activity, "Réseau non disponible", Toast.LENGTH_LONG).show()
             }})
 
     }
@@ -123,7 +127,7 @@ class LoginFragment : Fragment() {
             }
             override fun onFailure(call: Call<List<Commande>>?, t: Throwable?) {
                 Log.d("OnFailure", t.toString())
-                Toast.makeText(this@LoginFragment.activity, "From OnFailure", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginFragment.activity, "Réseau non disponible", Toast.LENGTH_SHORT).show()
             }})
     }
 
@@ -255,58 +259,5 @@ class LoginFragment : Fragment() {
         }})
     }
 
-    // TODO : adapt it to its fragment when copied
-    private fun getAllPharmacies() {
 
-        val call = RetrofitService.endpoint.getPharmacies()
-        call.enqueue(object : Callback<List<Pharmacie>>{
-            override fun onResponse(call: Call<List<Pharmacie>>?, response: Response<List<Pharmacie>>?) {
-
-                if(response?.isSuccessful!!) {
-
-                    if( response != null){
-                        Log.d("OnResponse",response.body().toString())
-                    }
-                    val pharmacies: List<Pharmacie>? = response.body()
-/*                    nom1.text = pharmacies?.get(0)?.nom
-                    nom2.text = pharmacies?.get(1)?.nom
-                    ville1.text = pharmacies?.get(0)?.ville
-                    ville2.text = pharmacies?.get(1)?.ville*/
-                }
-                else {
-
-                    Toast.makeText(this@LoginFragment.activity, "Error !", Toast.LENGTH_SHORT).show()
-                }
-            }
-            override fun onFailure(call: Call<List<Pharmacie>>?, t: Throwable?) {
-                Log.d("OnFailure",t.toString())
-                Toast.makeText(this@LoginFragment.activity, "Failed !", Toast.LENGTH_SHORT).show()
-            }})
-
-
-    }
-
-    // TODO : adapt it to its fragment when copied
-    private fun addUser(user : User){
-
-        val call = RetrofitService.endpoint.addUser(user)
-
-        call.enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>?, response:
-            Response<String>?) {
-
-                if(response?.isSuccessful!!) {
-
-                    Toast.makeText(this@LoginFragment.activity,response.body()+"From isSuccessful", Toast.LENGTH_LONG).show()
-                }
-                else
-                {
-                    Toast.makeText(this@LoginFragment.activity,"From else isSuccesful", Toast.LENGTH_LONG).show()
-                }
-            }
-            override fun onFailure(call: Call<String>?, t: Throwable?) {
-                Log.d("OnFailure",t.toString())
-                Toast.makeText(this@LoginFragment.activity, "onFailure", Toast.LENGTH_LONG).show()
-            }})
-    }
 }
