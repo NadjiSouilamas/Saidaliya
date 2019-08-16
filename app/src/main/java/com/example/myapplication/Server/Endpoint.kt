@@ -7,6 +7,13 @@ import com.example.myapplication.Identity.Identity
 import com.example.myapplication.Identity.TelMdp
 import retrofit2.Call
 import retrofit2.http.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.http.POST
+import retrofit2.http.Multipart
+
+
 
 interface Endpoint {
 
@@ -23,21 +30,31 @@ interface Endpoint {
     @POST("adduser")
     fun addUser(@Body user: User): Call<String>
 
-    // TODO after authentication
+
     @GET("/getCommandes")
     fun getCommandes(): Call<List<Commande>>
+
 
     @GET("getpharmacies")
     fun getPharmacies(): Call<List<Pharmacie>>
 
+    // maybe useless
     @GET("getpharmaciesparville/{ville}")
     fun getPharmaciesParVille(@Path("ville")ville: String ): Call<List<Pharmacie>>
 
+    // maybe useless
     @GET("getpharmacie/{id}")
     fun getPharmacie(@Path("id")id : Int): Call<List<Pharmacie>>
 
     @POST("addcommande")
     fun addCommande(@Body commande: Commande): Call<String>
+
+    @Multipart
+    @POST("upload")
+    fun upload(
+        @Part("description") description: RequestBody,
+        @Part file: MultipartBody.Part
+    ): Call<String>
 
     @POST("deletecommande")
     fun deleteCommande(@Body commande: Commande): Call<String>
