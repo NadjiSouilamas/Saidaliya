@@ -1,7 +1,10 @@
 package com.example.myapplication
 
-import android.content.Context
-import android.net.Uri
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.checkSelfPermission
 import com.example.myapplication.Entity.Commande
 import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.LocalStorage.RoomService
@@ -37,14 +41,86 @@ class CreerCommandeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        makeCommandeButton.setOnClickListener {
-            nomCommande = "nouvelle Commande"
-            nomPharma = "Les Roses"
-            villePharma = "Blida"
+        uploadImage.setOnClickListener {
 
-            creerCommande()
+            // check for runtime permission
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                if( checkSelfPermission(RoomService.context, Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                        PackageManager.PERMISSION_DENIED){
+                    // Permission denied
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    // show popup to request runtime permission
+                    requestPermissions(permissions, PERMISSION_CODE)
+                }
+                else{
+                    // already granted
+                    pickImageFromGallery()
+                }
+            }
+            else{
+                // system os <= Marshmallow
+            }
+
+            //            nomCommande = "nouvelle Commande"
+//            nomPharma = "Les Roses"
+//            villePharma = "Blida"
+//
+//            creerCommande()
+        }
+
+        lancerCommande.setOnClickListener {
+            if( checkFields()){
+
+            }
         }
     }
+
+    private fun checkFields(): Boolean {
+
+        // TODO : UI interaction in case a field is missing or image is empty
+        return true
+
+    }
+
+    private fun pickImageFromGallery() {
+        // intent to pick image
+        val intent = Intent(Intent.ACTION_PICK)
+
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    companion object {
+        // image pick code
+        private val IMAGE_PICK_CODE = 1000
+        // Permission code
+        private val PERMISSION_CODE = 1001
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if( grantResults.size > 0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    // permission granted from popup
+                    pickImageFromGallery()
+                }
+                else{
+                    // permission denied from popup
+                    Toast.makeText(this@CreerCommandeFragment.activity,"Permission denied", Toast.LENGTH_LONG).show()
+
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            ordonnanceImage.setImageURI(data?.data)
+        }
+    }
+
 
     private fun creerCommande(){
         var idPharma = RoomService.appDatabase.getPharmacieDao().getIDPharmacie(nomPharma, villePharma).get(0)
