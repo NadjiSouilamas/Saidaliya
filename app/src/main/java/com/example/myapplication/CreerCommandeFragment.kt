@@ -44,6 +44,7 @@ class CreerCommandeFragment : Fragment() {
     lateinit var villePharma: String
 
     var uriOrdonnance : Uri? = null
+    var file : File? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,12 +76,6 @@ class CreerCommandeFragment : Fragment() {
             else{
                 // system os <= Marshmallow
             }
-
-            //            nomCommande = "nouvelle Commande"
-//            nomPharma = "Les Roses"
-//            villePharma = "Blida"
-//
-//            creerCommande()
         }
 
         lancerCommande.setOnClickListener {
@@ -92,6 +87,9 @@ class CreerCommandeFragment : Fragment() {
 
     private fun checkFields(): Boolean {
 
+        nomPharma = "Les Roses"
+        nomCommande = "Success"
+        villePharma = "Blida"
         // TODO : UI interaction in case a field is missing or image is empty
         return true
 
@@ -134,67 +132,27 @@ class CreerCommandeFragment : Fragment() {
         if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
             // Saving URI of image
             uriOrdonnance = data?.data
+            var path = UriFileManager.getRealPathFromURI(uriOrdonnance)
+            file = File(path)
+
             // Displaying image
             ordonnanceImage.setImageURI(uriOrdonnance)
 
         }
     }
 
-    /*
-    private fun getRealPathFromURI(context: Context, contentUri: Uri ): String {
-
-    var cursor : Cursor? = null
-    try {
-        var proj =  {MediaStore.Images.Media.DATA}
-        cursor = context.getContentResolver().query(contentUri,  proj, null, null, null);
-        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-        cursor.moveToFirst();
-        return cursor.getString(column_index);
-    } catch (Exception e) {
-        Log.e(TAG, "getRealPathFromURI Exception : " + e.toString());
-        return "";
-    } finally {
-        if (cursor != null) {
-            cursor.close();
-        }
-    }
-}*/
     private fun uploadImage(){
-        /**NEWLY ADDED
-        var cr = this@CreerCommandeFragment.activity!!.getContentResolver()
-        var projection = arrayOf(MediaStore.MediaColumns.DATA)
-        var cur = cr.query(Uri.parse(uriOrdonnance), projection, null, null, null);
-Cursor
-if(cur != null) {
-    cur.moveToFirst();
-    String filePath = cur.getString(0);
-    File imageFile = new File(filePath);
-    if(imageFile.exists()) {
-        // do something if it exists
-        entity.addPart("image", new FileBody(imageFile));
-    }
-    else {
-        // File was not found
-        Log.e("MMP","Image not Found");
-    }
-}
-else {
-    // content Uri was invalid or some other error occurred
-    Log.e("MMP","Invalid content or some error occured");
-}
-        END NEWLY*/
-        var path = UriFileManager.getRealPathFromURI(uriOrdonnance)
-        var file = File(path)
 
-        Log.d("File name", file.name)
-        Log.d("File path", file.absolutePath)
+        Log.d("File name", file!!.name)
+        Log.d("File path", file!!.absolutePath)
         var requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
-        var body = MultipartBody.Part.createFormData("myFile", file.name, requestFile)
 
-        var descriptionString = "hello, this is Nadji"
+        val filename = Date().time.toString()+file!!.name
+        Log.d("New filename", filename)
+        var body = MultipartBody.Part.createFormData("myFile", filename, requestFile)
+
+        var descriptionString = "uploads"
         var description = RequestBody.create(okhttp3.MultipartBody.FORM, descriptionString)
-
-        Log.d("MyLog", "whyyyy  "+requestFile.toString())
 
         // request
         var call = RetrofitService.endpoint.upload(description, body)
@@ -204,28 +162,30 @@ else {
 
                 if(response?.isSuccessful!!) {
 
-                    Log.d("MyLog", response.body())
-                    Toast.makeText(this@CreerCommandeFragment.activity,"From isSuccessful", Toast.LENGTH_LONG).show()
+                    Log.d("upload success", response.body())
+
+                    var idPharma = RoomService.appDatabase.getPharmacieDao().getIDPharmacie(nomPharma, villePharma).get(0)
+                    val commande = Commande(0, nomCommande, MyIdentity.user!!.tel, idPharma, nomPharma, villePharma, filename, SimpleDateFormat("dd MMM yyyy").format(Date()), "En attente")
+
+                    creerCommande(commande)
                 }
                 else
                 {
                     Log.d("MyLog", "code error = "+response.code())
-                    Toast.makeText(this@CreerCommandeFragment.activity,"From Not Succesful", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CreerCommandeFragment.activity,"Oops, une erreur s'est produite", Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(call: Call<String>?, t: Throwable?) {
                 Log.d("hhhh",t.toString())
-                Toast.makeText(this@CreerCommandeFragment.activity, "From onFailure", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@CreerCommandeFragment.activity, "Réseau non disponible !", Toast.LENGTH_LONG).show()
             }})
     }
 
 
 
-    private fun creerCommande(){
-        var idPharma = RoomService.appDatabase.getPharmacieDao().getIDPharmacie(nomPharma, villePharma).get(0)
+    private fun creerCommande(commande: Commande){
 
-        Log.d("MyLog", "HERE IS ID PHARMACIE 0 = "+ idPharma)
-        val call = RetrofitService.endpoint.addCommande(Commande(0, nomCommande, MyIdentity.user!!.tel, idPharma, nomPharma, villePharma, "nameofthefile", SimpleDateFormat("dd MMM yyyy").format(Date()), "En attente"))
+        val call = RetrofitService.endpoint.addCommande(commande)
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>?, response:
             Response<String>?) {
@@ -233,7 +193,7 @@ else {
                 if(response?.isSuccessful!!) {
 
                     Log.d("MyLog", response.body())
-                    Toast.makeText(this@CreerCommandeFragment.activity,"From isSuccessful", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CreerCommandeFragment.activity,"Add commande success", Toast.LENGTH_LONG).show()
                 }
                 else
                 {
