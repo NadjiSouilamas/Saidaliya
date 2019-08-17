@@ -69,4 +69,7 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 
+    // Google maps
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+
 }
