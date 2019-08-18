@@ -8,6 +8,10 @@ data class Pharmacie(
     @PrimaryKey
     var id: Int,
     var nom: String,
+    var ouverture: Int,
+    var fermeture: Int,
+    var lat: Double,
+    var lng: Double,
     var adresse:String,
     var ville: String,
     var tel: String,
