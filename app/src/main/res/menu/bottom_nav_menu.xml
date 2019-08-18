@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+        android:id="@id/commandes"
+
+        android:title="@string/commandes" />
+    <!--android:icon="@drawable/ic_commandes"-->
+
+<item
+        android:id="@id/villes"
+        android:title="@string/villes" />
+        <!--android:icon="@drawable/ic_villes"-->
+
+
+<item
+        android:id="@id/proximite"
+        android:title="@string/proximite" />
+    <!--android:icon="@drawable/ic_proximite"-->
+
 
 </menu>
