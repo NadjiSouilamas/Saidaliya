@@ -18,8 +18,14 @@ import kotlinx.android.synthetic.main.proximite_fragment.*
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        supportActionBar?.hide()
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         // Context for RoomService
         RoomService.context = this

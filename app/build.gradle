@@ -45,7 +45,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.0.0'
     implementation "androidx.navigation:navigation-fragment-ktx:2.0.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.0.0"
-    implementation 'com.google.android.material:material:1.0.0'  // MATERIAL DESIGN
+    implementation 'com.google.android.material:material:1.1.0-alpha05'  // MATERIAL DESIGN
 
     /* ROOM SERVICE AND ANDROIDX TESTS ( see module 'storage' in case of prblms ) : FROM COURSE ABOUT STOCKAGE EN LOCAL*/
 
