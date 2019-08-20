@@ -7,10 +7,21 @@
                                                    tools:context=".Pharmacie_ville_fragment"
                                                    android:id="@+id/frameLayout6">
 
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/ToolbarVilles"
+            android:layout_width="match_parent"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+            app:title="Mes Commandes"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/colorPrimary">
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/colorBackground"
+            app:layout_constraintTop_toTopOf="@id/ToolbarVilles" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/Pharmacie_recycler"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

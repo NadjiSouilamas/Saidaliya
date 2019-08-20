@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity() {
 //                Integer.toString(destination.id)
 //            }
 
-            if ( bottom_nav_view.visibility == View.VISIBLE)
+//            if ( bottom_nav_view.visibility == View.VISIBLE)
                 bottom_nav_view.visibility = View.GONE
-            else
-                bottom_nav_view.visibility = View.VISIBLE
+//            else
+//                bottom_nav_view.visibility = View.VISIBLE
 //            Toast.makeText(this@MainActivity, "Navigated to $dest",
 //                Toast.LENGTH_SHORT).show()
 //            Log.d("NavigationActivity", "Navigated to $dest")

@@ -5,10 +5,8 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -36,11 +34,16 @@ class CommandesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.commandes_fragment, container, false)
+        var view = inflater.inflate(R.layout.commandes_fragment, container, false)
+
+        setHasOptionsMenu(true)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         // Store all pharmacies in local database
             // retrieve them from server
@@ -72,6 +75,11 @@ class CommandesFragment : Fragment() {
         gotoPharmacie.setOnClickListener{
             findNavController().navigate(R.id.villes, null)
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.commandes_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun initializeCommandeFragment(){

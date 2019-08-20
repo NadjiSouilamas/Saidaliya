@@ -2,6 +2,12 @@
 <resources>
     <color name="colorPrimary">#009688</color>
     <color name="colorPrimaryDark">#00796b</color>
+    <color name="colorOnPrimary">#F4F4F4</color>
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorSecondary">#5EC2C9</color>
+    <color name="colorCard">#232F34</color>
+    <color name="colorBackground">#EAEDF0</color>
+    <color name="commandeRejected">#BD473A</color>
+    <color name="commandeWaiting">#E67E2E</color>
+    <color name="commandeReady">#2E91AA</color>
 </resources>

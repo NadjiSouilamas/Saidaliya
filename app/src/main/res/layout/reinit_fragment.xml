@@ -3,42 +3,79 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".ReinitFragment" android:id="@+id/frameLayout2">
+                                                   tools:context=".ReinitFragment" android:id="@+id/frameLayout2"
+                                                   android:background="@color/colorPrimary">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="toReinit"
-            android:id="@+id/textView" app:layout_constraintEnd_toEndOf="parent"
+            android:text="Réinitialiser mot de passe"
+            android:textSize="22dp"
+            android:fontFamily="@font/comic"
+            android:textColor="@color/colorOnPrimary"
+            android:id="@+id/reinitTitle" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp" android:layout_marginTop="120dp" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0.498"/>
+<!--Margin top to redefine-->
+
+    <EditText
+            android:ems="10"
+            android:id="@+id/NewPasswordEdit"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:hint="Nouveau mot de passe"
+            android:layout_marginTop="90dp"
+            android:drawableLeft="@drawable/ic_phone"
+            android:drawablePadding="10dp"
+            android:paddingBottom="10dp"
+            android:textColorHint="@color/colorOnPrimary"
+            android:backgroundTint="@color/colorOnPrimary"
+            app:layout_constraintTop_toBottomOf="@+id/reinitTitle"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="30dp" android:layout_marginRight="30dp"
+            android:fontFamily="@font/comic"
+            android:textSize="18dp"
+            android:inputType="phone"
+            android:textColor="@color/colorOnPrimary"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+    <EditText
+            android:id="@+id/ConfirmEdit"
+            android:textColor="@color/colorOnPrimary"
+            android:textColorHint="@color/colorOnPrimary"
+            android:backgroundTint="@color/colorOnPrimary"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:hint="Confirmer"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawablePadding="10dp"
+            android:paddingBottom="10dp"
+            android:fontFamily="@font/comic"
+            android:textSize="18dp"
+            android:inputType="textPassword"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/NewPasswordEdit" android:layout_marginStart="30dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="30dp"
+            android:layout_marginEnd="30dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="30dp"/>
+
     <Button
             android:text="Réinitialiser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/ReinitButton"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/ConfirmEdit"/>
-    <EditText
-            android:layout_width="wrap_content"
+            android:id="@+id/ReinitButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/NewPasswordEdit" android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:hint="Nouveau mot de passe"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/ConfirmEdit"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/NewPasswordEdit"
-            android:hint="Confirmation"/>
+            android:layout_marginTop="60dp"
+            app:layout_constraintTop_toBottomOf="@+id/ConfirmEdit" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="35dp" android:layout_marginStart="35dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
+            android:fontFamily="@font/comic"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:cornerRadius="20dp"
+            android:textSize="16dp"
+
+    />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

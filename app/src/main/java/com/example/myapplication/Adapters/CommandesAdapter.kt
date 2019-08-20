@@ -1,5 +1,7 @@
 package com.example.myapplication.Adapters
 
+import android.content.res.Resources
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,5 +49,19 @@ class CommandeViewHoder(v: View): RecyclerView.ViewHolder(v){
         place?.text = commande.nomPharmacie+", "+commande.villePharmacie
         date?.text = commande.dateEmission
         etat?.text = commande.etat
+
+        when(commande.etat){
+            "Rejetée" ->{
+                etat?.setTextColor(Color.parseColor("#BD473A"))
+            }
+
+            "En attente" ->{
+                etat?.setTextColor(Color.parseColor("#E67E2E"))
+            }
+
+            "Prête" ->{
+                etat?.setTextColor(Color.parseColor("#2E91AA"))
+            }
+        }
     }
 }

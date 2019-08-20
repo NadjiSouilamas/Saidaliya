@@ -10,13 +10,13 @@
                                        android:layout_height="45dp"
                                        android:theme="?attr/actionBarTheme"
                                        app:layout_constraintTop_toTopOf="parent"
-                                       android:minHeight="?attr/actionBarSize"
+
                                        android:id="@+id/toolbar">
 
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-            android:text="CRERE UN COMPTE"
+            android:text="CREER UN COMPTE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
@@ -26,8 +26,7 @@
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
             android:textSize="20dp"
             android:textColor="#2E96AA"
-            android:fontFamily="@font/eras"
-    />
+            android:fontFamily="@font/eras"/>
 
     <EditText
             android:layout_width="0dp"
@@ -132,12 +131,14 @@
             android:layout_marginEnd="35dp" android:layout_marginRight="35dp"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="35dp"
             android:layout_marginStart="35dp"
-            android:textColor="#EEE7E7"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:cornerRadius="20dp"
             android:textSize="14dp"
             android:fontFamily="@font/comic"
     />
     <Button
             android:text="Déjà inscrit ? Se connecter"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/deja_inscrit" android:layout_marginTop="35dp"
@@ -145,10 +146,10 @@
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:background="#00000000"
+            app:backgroundTint="#00000000"
             android:textSize="8dp"
             android:textStyle="bold"
-            android:textColor="#2E96AA"
+            android:textColor="@color/colorPrimary"
             android:fontFamily="@font/comic"
     />
 

@@ -14,10 +14,20 @@ import com.example.myapplication.Server.RetrofitService
 
 class PharmaciesAdapter(var pharmaList: List<Pharmacie>): RecyclerView.Adapter<PharmacieViewHoder>() {
 
+    private var mListener : OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onItemClick(position : Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        mListener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PharmacieViewHoder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.pharmacie_card, parent, false)
-        return PharmacieViewHoder(cellForRow) // To be checked
+        return PharmacieViewHoder(cellForRow, mListener) // To be checked
     }
 
     // Number of items
@@ -31,7 +41,7 @@ class PharmaciesAdapter(var pharmaList: List<Pharmacie>): RecyclerView.Adapter<P
     }
 }
 
-class PharmacieViewHoder(v: View): RecyclerView.ViewHolder(v){
+class PharmacieViewHoder(v: View, listener: PharmaciesAdapter.OnItemClickListener?): RecyclerView.ViewHolder(v){
 
     private var image: ImageView? = null
     private var nom: TextView? = null
@@ -41,6 +51,17 @@ class PharmacieViewHoder(v: View): RecyclerView.ViewHolder(v){
         image = itemView.findViewById(R.id.ImagePharmacieCard)
         nom = itemView.findViewById(R.id.NamePharmacie)
         adresse = itemView.findViewById(R.id.AddressPharmacie)
+
+        v.setOnClickListener(View.OnClickListener(){
+            fun onClick(v: View){
+                if( listener != null){
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION){
+                        listener.onItemClick(position)
+                    }
+                }
+            }
+        })
     }
 
     fun bind(pharmacie: Pharmacie){
@@ -55,4 +76,6 @@ class PharmacieViewHoder(v: View): RecyclerView.ViewHolder(v){
         nom?.text = pharmacie.nom
         adresse?.text = pharmacie.adresse
     }
+
+
 }

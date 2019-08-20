@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.pharmacies_ville_fragment.*
 class Pharmacie_ville_fragment : Fragment() {
 
     lateinit var pharmaList: List<Pharmacie>
+    lateinit var pharmaAdapter : PharmaciesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +32,19 @@ class Pharmacie_ville_fragment : Fragment() {
         Pharmacie_recycler.layoutManager = LinearLayoutManager(this.activity)
         getPharmacies()
 
+        pharmaAdapter.setOnItemClickListener(
+            PharmaciesAdapter.OnItemClickListener(){
+                fun onClick
+            }
+        )
+
     }
 
     private fun getPharmacies(){
 
         pharmaList = RoomService.appDatabase.getPharmacieDao().getAllPharmacies()
-        Pharmacie_recycler.adapter = PharmaciesAdapter(pharmaList)
+        pharmaAdapter = PharmaciesAdapter(pharmaList)
+        Pharmacie_recycler.adapter = pharmaAdapter
     }
 
 }
