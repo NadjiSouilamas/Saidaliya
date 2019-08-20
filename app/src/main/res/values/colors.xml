@@ -6,6 +6,7 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorSecondary">#5EC2C9</color>
     <color name="colorCard">#232F34</color>
+    <color name="lowOpacityWhite">#81FFFFFF</color>
     <color name="colorBackground">#EAEDF0</color>
     <color name="commandeRejected">#BD473A</color>
     <color name="commandeWaiting">#E67E2E</color>

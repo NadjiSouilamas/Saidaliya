@@ -5,4 +5,67 @@
                                                    android:layout_height="match_parent"
                                                    tools:context=".PharmacieFragment" android:id="@+id/frameLayout5">
 
+    <androidx.appcompat.widget.Toolbar
+            android:layout_width="395dp"
+            android:layout_height="289dp"
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <EditText
+            android:textColor="@color/lowOpacityWhite"
+            android:textColorHint="@color/lowOpacityWhite"
+            android:autofillHints="Nom"
+            android:backgroundTint="@color/lowOpacityWhite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/CommandeNameEdit" android:layout_marginTop="100dp"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="48dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <EditText
+            android:textColor="@color/lowOpacityWhite"
+            android:textColorHint="@color/lowOpacityWhite"
+            android:autofillHints="Pharmacie"
+            android:backgroundTint="@color/lowOpacityWhite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:ems="10"
+            android:id="@+id/editText2"
+            app:layout_constraintStart_toStartOf="@+id/CommandeNameEdit" app:layout_constraintEnd_toEndOf="@+id/CommandeNameEdit"
+            android:layout_marginTop="24dp" app:layout_constraintTop_toBottomOf="@+id/CommandeNameEdit"/>
+    <ImageView
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="0dp"
+            android:layout_height="186dp"
+            android:id="@+id/imageView" android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
+            app:layout_constraintHorizontal_bias="0.498"/>
+    <Button
+            android:text="Commander"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/OrderButton" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp" android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"/>
+    <Spinner
+            android:textColor="@color/lowOpacityWhite"
+            android:textColorHint="@color/lowOpacityWhite"
+            android:autofillHints="Pharmacie"
+            android:backgroundTint="@color/lowOpacityWhite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/pharmaSpinner" app:layout_constraintStart_toStartOf="@+id/CommandeNameEdit"
+            app:layout_constraintEnd_toEndOf="@+id/CommandeNameEdit" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/editText2"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

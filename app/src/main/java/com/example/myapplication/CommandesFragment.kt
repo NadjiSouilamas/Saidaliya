@@ -69,7 +69,7 @@ class CommandesFragment : Fragment() {
         initializeCommandeFragment()
 
         makeCommandeFAB.setOnClickListener{
-            findNavController().navigate(R.id.proximite, null)
+            findNavController().navigate(R.id.action_commandes_to_creer_commande, null)
         }
 
         gotoPharmacie.setOnClickListener{

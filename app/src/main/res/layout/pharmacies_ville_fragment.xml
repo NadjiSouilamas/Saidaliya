@@ -9,19 +9,23 @@
 
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/ToolbarVilles"
+            android:elevation="8dp"
             android:layout_width="match_parent"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-            app:title="Mes Commandes"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
             android:background="@color/colorPrimary">
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.appcompat.widget.SearchView.SearchAutoComplete android:layout_width="wrap_content"
+                                                             android:layout_height="wrap_content"
+                                                             app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/colorBackground"
-            app:layout_constraintTop_toTopOf="@id/ToolbarVilles" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/Pharmacie_recycler"/>
+            android:id="@+id/Pharmacie_recycler"
+            app:layout_constraintTop_toBottomOf="@+id/ToolbarVilles" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

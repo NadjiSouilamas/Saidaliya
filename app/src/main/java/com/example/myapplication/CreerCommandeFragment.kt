@@ -16,8 +16,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContextCompat.checkSelfPermission
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.Entity.Commande
 import com.example.myapplication.File.UriFileManager
 import com.example.myapplication.Identity.MyIdentity
@@ -33,8 +35,7 @@ import retrofit2.Response
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-
-
+import kotlin.collections.ArrayList
 
 
 class CreerCommandeFragment : Fragment() {
@@ -45,6 +46,7 @@ class CreerCommandeFragment : Fragment() {
 
     var uriOrdonnance : Uri? = null
     var file : File? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +59,12 @@ class CreerCommandeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        uploadImage.setOnClickListener {
+        setSpinnerElements()
+
+        backUp.setOnClickListener{
+            findNavController().navigateUp()
+        }
+        ordonnanceImage.setOnClickListener {
 
             // check for runtime permission
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -78,19 +85,54 @@ class CreerCommandeFragment : Fragment() {
             }
         }
 
-        lancerCommande.setOnClickListener {
+        OrderButton.setOnClickListener {
             if( checkFields()){
                 uploadImage()
             }
         }
     }
 
+
+    private fun setSpinnerElements(){
+
+        val pharmaList = RoomService.appDatabase.getPharmacieDao().getAllPharmacies()
+
+        val pharmaNames = mutableListOf<String>()
+
+        for( pharmacie in pharmaList){
+            pharmaNames.add(pharmacie.nom+" - "+pharmacie.ville)
+        }
+
+        val adapter = ArrayAdapter(this@CreerCommandeFragment.activity, R.layout.support_simple_spinner_dropdown_item, pharmaNames)
+
+        pharmacieEdit.setAdapter(adapter)
+    }
+
+
     private fun checkFields(): Boolean {
 
-        nomPharma = "Les Roses"
-        nomCommande = "Success"
-        villePharma = "Blida"
-        // TODO : UI interaction in case a field is missing or image is empty
+        if( pharmacieEdit.text.toString() == ""
+            || CommandeNameEdit.text.toString() == ""){
+
+            Toast.makeText(this@CreerCommandeFragment.activity, "Veuillez renseigner tous les champs", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (file == null){
+
+            Toast.makeText(this@CreerCommandeFragment.activity, "Veuillez uploader votre ordonnance", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        nomCommande = CommandeNameEdit.text.toString()
+        var str = pharmacieEdit.text.toString()
+
+        val part = str.split(" ")
+
+        nomPharma = part.get(0)
+        villePharma = part.get(2) // the pattern is "nom - ville"
+        Log.d("Parts", "nom = "+nomPharma+", ville = "+villePharma)
+
         return true
 
     }
