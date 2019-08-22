@@ -17,10 +17,6 @@
             android:background="@color/colorPrimary">
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.appcompat.widget.SearchView.SearchAutoComplete android:layout_width="wrap_content"
-                                                             android:layout_height="wrap_content"
-                                                             app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"/>
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"

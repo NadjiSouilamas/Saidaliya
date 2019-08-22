@@ -34,11 +34,16 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.login_fragment, container, false)
+        val view = inflater.inflate(R.layout.login_fragment, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if( MyIdentity.isLoggedIn()){
+            findNavController().navigate(R.id.action_login_to_commandes, null)
+        }
 
         LoginButton.setOnClickListener {
             telField = phoneEdit.text.toString()

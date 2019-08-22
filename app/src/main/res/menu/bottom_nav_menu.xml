@@ -2,17 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
         android:id="@id/commandes"
-
+        android:icon="@drawable/ic_commande"
         android:title="@string/commandes" />
     <!--android:icon="@drawable/ic_commandes"-->
 
 <item
         android:id="@id/villes"
+        android:icon="@drawable/ic_ville"
         android:title="@string/villes" />
-        <!--android:icon="@drawable/ic_villes"-->
+
 
 
 <item
+
+        android:icon="@drawable/ic_proximite"
         android:id="@id/proximite"
         android:title="@string/proximite" />
     <!--android:icon="@drawable/ic_proximite"-->

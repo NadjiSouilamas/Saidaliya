@@ -29,8 +29,11 @@
         <action android:id="@+id/action_commandesPharm_to_creer_commande" app:destination="@id/creer_commande"/>
     </fragment>
     <fragment android:id="@+id/villes"
-              android:name="com.example.myapplication.Pharmacie_ville_fragment"
-              android:label="Villes" tools:layout="@layout/pharmacies_ville_fragment">
+              android:name="com.example.myapplication.PharmaciesVilleFragment"
+              android:label="Villes"
+              tools:layout="@layout/pharmacies_ville_fragment">
+
+
         <action android:id="@+id/action_villes_to_pharmacie" app:destination="@id/pharmacie"/>
     </fragment>
     <fragment android:id="@+id/proximite" android:name="com.example.myapplication.ProximiteFragment"
@@ -38,7 +41,13 @@
     <fragment android:id="@+id/creer_commande" android:name="com.example.myapplication.CreerCommandeFragment"
               android:label="creer_commande" tools:layout="@layout/creer_commande_fragment"/>
     <fragment android:id="@+id/pharmacie" android:name="com.example.myapplication.PharmacieFragment"
-              android:label="pharmacie" tools:layout="@layout/pharmacie_fragment">
+              android:label="pharmacie"
+              tools:layout="@layout/pharmacie_fragment">
+
+        <argument
+                android:name="idPharma"
+                app:argType="integer"
+                android:defaultValue="0"/>
         <action android:id="@+id/action_pharmacie_to_commandesPharm" app:destination="@id/commandes_pharm"/>
         <action android:id="@+id/action_pharmacie_to_login" app:destination="@id/login"/>
     </fragment>

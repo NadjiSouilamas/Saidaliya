@@ -3,10 +3,12 @@ package com.example.myapplication
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,7 +19,7 @@ import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.LocalStorage.RoomService
 import kotlinx.android.synthetic.main.pharmacies_ville_fragment.*
 
-class Pharmacie_ville_fragment : Fragment() {
+class PharmaciesVilleFragment : Fragment() {
 
     lateinit var pharmaList: List<Pharmacie>
     lateinit var pharmaAdapter : PharmaciesAdapter
@@ -39,7 +41,13 @@ class Pharmacie_ville_fragment : Fragment() {
 
         Pharmacie_recycler.addOnItemClickListener(object: OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
-                findNavController().navigate(R.id.action_villes_to_pharmacie, null)
+
+                var idPharmaSelected = pharmaAdapter.pharmaList[position].id
+                val nextAction = PharmaciesVilleFragmentDirections.actionVillesToPharmacie()
+                nextAction.setIdPharma(idPharmaSelected)
+                Log.d("IDPHARMA",idPharmaSelected.toString())
+
+                findNavController().navigate(nextAction, null)
             }
         })
     }

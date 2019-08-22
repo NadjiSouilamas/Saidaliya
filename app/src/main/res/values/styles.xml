@@ -12,6 +12,21 @@
         <item name="textAppearanceHeadline6">@style/headline6</item>
     </style>
 
+    <style name="pharmaFrag" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/comic_bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="textPharmaFrag" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/comic</item>
+        <item name="android:textColor">@color/colorCard</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+
+
     <style name="TitlePharmacieCard" parent="Base.TextAppearance.MaterialComponents.Headline6">
 
         <item name="android:textSize">21sp</item>

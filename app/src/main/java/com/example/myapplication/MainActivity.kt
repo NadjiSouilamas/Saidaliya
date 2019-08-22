@@ -40,19 +40,29 @@ class MainActivity : AppCompatActivity() {
         setupBottomNavMenu(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-//            val dest: String = try {
-//                resources.getResourceName(destination.id)
-//            } catch (e: Resources.NotFoundException) {
-//                Integer.toString(destination.id)
-//            }
 
-//            if ( bottom_nav_view.visibility == View.VISIBLE)
-                bottom_nav_view.visibility = View.GONE
-//            else
-//                bottom_nav_view.visibility = View.VISIBLE
-//            Toast.makeText(this@MainActivity, "Navigated to $dest",
-//                Toast.LENGTH_SHORT).show()
-//            Log.d("NavigationActivity", "Navigated to $dest")
+            val dest: String = try {
+                resources.getResourceName(destination.id)
+            } catch (e: Resources.NotFoundException) {
+                Integer.toString(destination.id)
+            }
+            when(dest){
+                "com.example.myapplication:id/login" ->{
+                    bottom_nav_view.visibility = View.GONE
+                }
+
+                "com.example.myapplication:id/commandes" ->{
+                    bottom_nav_view.visibility = View.VISIBLE
+                }
+
+                "com.example.myapplication:id/villes" ->{
+                    bottom_nav_view.visibility = View.VISIBLE
+                }
+
+                "com.example.myapplication:id/pharmacie" -> {
+                    bottom_nav_view.visibility = View.GONE
+                }
+            }
         }
 
     }
