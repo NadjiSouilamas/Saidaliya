@@ -43,8 +43,6 @@ class CommandesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         // Store all pharmacies in local database
             // retrieve them from server
             // store them in local database
@@ -64,6 +62,9 @@ class CommandesFragment : Fragment() {
             * */
         //}
 
+        if( !MyIdentity.isLoggedIn()){
+            findNavController().navigate(R.id.action_commandes_to_login, null)
+        }
 
         commandes_recycler.layoutManager = LinearLayoutManager(this.activity)
         initializeCommandeFragment()
@@ -133,11 +134,11 @@ class CommandesFragment : Fragment() {
                     commandeList = response.body()!!
 
                     // Making the recycler adapter
-                    commandes_recycler.adapter = CommandesAdapter(commandeList!!)
+                    commandes_recycler.adapter = CommandesAdapter(commandeList)
 
                 } else {
                     Log.d("MyLog","GetCommandeServer : error msg = "+response.toString())
-                    Toast.makeText(this@CommandesFragment.activity, "NOT Successful", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@CommandesFragment.activity, "NOT Successful", Toast.LENGTH_SHORT).show()
                 }
             }
             override fun onFailure(call: Call<List<Commande>>?, t: Throwable?) {

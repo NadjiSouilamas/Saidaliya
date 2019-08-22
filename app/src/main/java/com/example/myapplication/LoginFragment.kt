@@ -41,6 +41,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        // Todo check this
         if( MyIdentity.isLoggedIn()){
             findNavController().navigate(R.id.action_login_to_commandes, null)
         }
@@ -51,6 +53,10 @@ class LoginFragment : Fragment() {
 
             if( checkField())
                 login()
+        }
+
+        anonymeButton.setOnClickListener {
+            findNavController().navigate(R.id.action_login_to_villes, null)
         }
 
         CreateAccountButton.setOnClickListener {
@@ -73,22 +79,24 @@ class LoginFragment : Fragment() {
             Response<Identity>?) {
 
                 if(response?.isSuccessful!!) {
-                    MyIdentity.user = response.body()?.user
-                    MyIdentity.token = response.body()?.token
-                    // Go to commande activity
-                    Log.d("TOKEN",MyIdentity.token)
-                    Log.d("User",response.body().toString())
-                    if(MyIdentity.user?.toReinit == 0 )
+
+                    val user = response.body()?.user
+                    val token = response.body()?.token
+
+                    // Storing user infos in shared pref
+                    MyIdentity.setUserTel(user!!.tel)
+                    MyIdentity.setUserToken(token!!)
+
+                    if(user?.toReinit == 0)
                         findNavController().navigate(R.id.action_login_to_commandes, null)
                     else
                         findNavController().navigate(R.id.action_login_to_reinit, null)
 
-                    //Toast.makeText(this@LoginFragment.activity,"From isSuccessful", Toast.LENGTH_LONG).show()
                 }
                 else
                 {
                     Log.d("NotSuccessful-response",response.message())
-                    Toast.makeText(this@LoginFragment.activity,"Téléphone ou mot de passe incorrects", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@LoginFragment.activity,"Téléphone ou mot de passe incorrect", Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(call: Call<Identity>?, t: Throwable?) {

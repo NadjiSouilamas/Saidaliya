@@ -19,7 +19,7 @@ object RetrofitService {
 
         client.addInterceptor(Interceptor {
              val request : Request = it.request()
-             val newRequest = request.newBuilder().header("Authorization", "bearer "+MyIdentity.token)
+             val newRequest = request.newBuilder().header("Authorization", "bearer "+MyIdentity.getUserToken())
             it.proceed(newRequest.build())
         })
 

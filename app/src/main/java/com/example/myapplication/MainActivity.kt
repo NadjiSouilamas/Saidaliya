@@ -7,9 +7,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
+import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.LocalStorage.RoomService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        // Context for RoomService
+        // Context for RoomService and MyIdentity
         RoomService.context = this
+        MyIdentity.context = this
 
         // NavController
         val host: NavHostFragment = supportFragmentManager
@@ -38,6 +41,13 @@ class MainActivity : AppCompatActivity() {
 
         // Setup BottomNav to navigate with navController
         setupBottomNavMenu(navController)
+
+        bottom_nav_view.setOnNavigationItemSelectedListener {item ->
+
+
+            onNavDestinationSelected(item, Navigation.findNavController(this, R.id.my_nav_host_fragment))
+
+        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
 

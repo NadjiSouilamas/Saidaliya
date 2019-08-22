@@ -50,15 +50,14 @@ class ReinitFragment : Fragment() {
     }
 
     fun reinit(){
-        val call = RetrofitService.endpoint.reinit( TelMdp(MyIdentity.user!!.tel, passwordField))
+
+        val call = RetrofitService.endpoint.reinit( TelMdp(MyIdentity.getUserTel(), passwordField))
 
         call.enqueue(object : Callback<String> {
             override fun onResponse(call: Call<String>?, response:
             Response<String>?) {
 
                 if(response?.isSuccessful!!) {
-                    // Update toReinit in local
-                    MyIdentity.user!!.toReinit = 0
                     Toast.makeText(this@ReinitFragment.activity,"PasswordReinit", Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.action_reinit_to_commandes, null)
                 }

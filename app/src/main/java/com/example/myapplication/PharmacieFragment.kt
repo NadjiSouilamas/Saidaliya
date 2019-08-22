@@ -59,6 +59,7 @@ class PharmacieFragment : Fragment() {
         backUp2.setOnClickListener{
             findNavController().navigateUp()
         }
+
     }
 
     fun newFacebookIntent(pm: PackageManager, url: String): Intent {

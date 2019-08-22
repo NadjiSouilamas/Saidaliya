@@ -2,14 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/graphe"
-            app:startDestination="@id/login">
+            app:startDestination="@+id/login">
 
     <fragment android:id="@+id/login" android:name="com.example.myapplication.LoginFragment"
               android:label="login" tools:layout="@layout/login_fragment">
         <action android:id="@+id/action_login_to_register" app:destination="@id/register"/>
         <action android:id="@+id/action_login_to_reinit" app:destination="@id/reinit"/>
-        <action android:id="@+id/action_login_to_commandes" app:destination="@id/commandes"/>
-        <action android:id="@+id/action_login_to_villes" app:destination="@id/villes"/>
+        <action android:id="@+id/action_login_to_commandes" app:destination="@id/commandes"
+                app:popUpTo="@+id/login" app:popUpToInclusive="true" app:launchSingleTop="true"/>
+        <action android:id="@+id/action_login_to_villes" app:destination="@id/villes" app:popUpTo="@+id/login"
+                app:popUpToInclusive="true"/>
     </fragment>
     <fragment android:id="@+id/register" android:name="com.example.myapplication.RegisterFragment"
               android:label="register" tools:layout="@layout/register_fragment">
@@ -17,11 +19,13 @@
     </fragment>
     <fragment android:id="@+id/reinit" android:name="com.example.myapplication.ReinitFragment"
               android:label="reinit" tools:layout="@layout/reinit_fragment">
-        <action android:id="@+id/action_reinit_to_commandes" app:destination="@id/commandes"/>
+        <action android:id="@+id/action_reinit_to_commandes" app:destination="@id/commandes" app:popUpTo="@+id/login"
+                app:popUpToInclusive="true" app:launchSingleTop="true"/>
     </fragment>
     <fragment android:id="@+id/commandes" android:name="com.example.myapplication.CommandesFragment"
               android:label="Commandes" tools:layout="@layout/commandes_fragment">
         <action android:id="@+id/action_commandes_to_creer_commande" app:destination="@id/creer_commande"/>
+        <action android:id="@+id/action_commandes_to_login" app:destination="@id/login" app:popUpTo="@+id/villes"/>
     </fragment>
     <fragment android:id="@+id/commandes_pharm"
               android:name="com.example.myapplication.CommandesParPharmacieFragment"

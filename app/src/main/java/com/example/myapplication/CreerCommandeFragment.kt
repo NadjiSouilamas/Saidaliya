@@ -207,7 +207,7 @@ class CreerCommandeFragment : Fragment() {
                     Log.d("upload success", response.body())
 
                     var idPharma = RoomService.appDatabase.getPharmacieDao().getIDPharmacie(nomPharma, villePharma).get(0)
-                    val commande = Commande(0, nomCommande, MyIdentity.user!!.tel, idPharma, nomPharma, villePharma, filename, SimpleDateFormat("dd MMM yyyy").format(Date()), "En attente")
+                    val commande = Commande(0, nomCommande, MyIdentity.getUserTel(), idPharma, nomPharma, villePharma, filename, SimpleDateFormat("dd MMM yyyy").format(Date()), "En attente")
 
                     creerCommande(commande)
                 }
