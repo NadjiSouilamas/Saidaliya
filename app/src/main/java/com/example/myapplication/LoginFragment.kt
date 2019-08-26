@@ -17,6 +17,7 @@ import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.Identity.TelMdp
 import com.example.myapplication.Server.RetrofitService
 import kotlinx.android.synthetic.main.login_fragment.*
+import kotlinx.android.synthetic.main.redirection.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,11 +63,15 @@ class LoginFragment : Fragment() {
         CreateAccountButton.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_register, null)
         }
+
     }
 
     private fun checkField(): Boolean {
 
-        // TODO check if fields are not empty, and display warnings if they are
+        if(telField == ""){
+            Toast.makeText(activity, "Veuillez entrer un numéro de téléphone valide", Toast.LENGTH_SHORT).show()
+            return false
+        }
         return true
     }
 

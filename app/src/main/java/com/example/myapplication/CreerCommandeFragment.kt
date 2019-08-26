@@ -21,6 +21,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.Entity.Commande
+import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.File.UriFileManager
 import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.LocalStorage.RoomService
@@ -43,10 +44,13 @@ class CreerCommandeFragment : Fragment() {
     lateinit var nomCommande: String
     lateinit var nomPharma: String
     lateinit var villePharma: String
+    lateinit var pharmaList: List<Pharmacie>
 
+    var idPharma = -1
     var uriOrdonnance : Uri? = null
     var file : File? = null
 
+    val pharmaNames = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,9 +65,19 @@ class CreerCommandeFragment : Fragment() {
 
         setSpinnerElements()
 
+        arguments?.let {
+            val safeArgs = PharmacieFragmentArgs.fromBundle(it)
+            idPharma = safeArgs.idPharma
+        }
+
+        if(idPharma != -1){
+            pharmacieEdit.setText(pharmaList.get(idPharma - 1).nom+" - "+pharmaList.get(idPharma - 1).ville)
+        }
+
         backUp.setOnClickListener{
             findNavController().navigateUp()
         }
+
         ordonnanceImage.setOnClickListener {
 
             // check for runtime permission
@@ -95,9 +109,7 @@ class CreerCommandeFragment : Fragment() {
 
     private fun setSpinnerElements(){
 
-        val pharmaList = RoomService.appDatabase.getPharmacieDao().getAllPharmacies()
-
-        val pharmaNames = mutableListOf<String>()
+        pharmaList = RoomService.appDatabase.getPharmacieDao().getAllPharmacies()
 
         for( pharmacie in pharmaList){
             pharmaNames.add(pharmacie.nom+" - "+pharmacie.ville)
@@ -235,17 +247,18 @@ class CreerCommandeFragment : Fragment() {
                 if(response?.isSuccessful!!) {
 
                     Log.d("MyLog", response.body())
-                    Toast.makeText(this@CreerCommandeFragment.activity,"Add commande success", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CreerCommandeFragment.activity,"Votre commande a été créee avec succès", Toast.LENGTH_LONG).show()
+                    findNavController().navigateUp()
                 }
                 else
                 {
                     Log.d("MyLog", "code error = "+response.code())
-                    Toast.makeText(this@CreerCommandeFragment.activity,"From Not Succesful", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@CreerCommandeFragment.activity,"Erreur du serveur", Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(call: Call<String>?, t: Throwable?) {
                 Log.d("OnFailure",t.toString())
-                Toast.makeText(this@CreerCommandeFragment.activity, "From onFailure", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@CreerCommandeFragment.activity, "Réseau non disponible !", Toast.LENGTH_LONG).show()
             }})
     }
 }

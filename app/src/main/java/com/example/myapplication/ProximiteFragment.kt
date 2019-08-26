@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.myapplication.Entity.Pharmacie
+import com.example.myapplication.LocalStorage.RoomService
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -16,6 +18,8 @@ import kotlinx.android.synthetic.main.proximite_fragment.*
 class ProximiteFragment : Fragment(), OnMapReadyCallback{
 
     lateinit var map : GoogleMap
+
+    lateinit var pharmaList : List<Pharmacie>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +37,15 @@ class ProximiteFragment : Fragment(), OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        pharmaList = RoomService.appDatabase.getPharmacieDao().getPharmaciesParVille("Alger")
+
+        var firstPlace = LatLng(pharmaList.get(0).lat, pharmaList.get(0).lng)
+
+        pharmaList.forEach {
+            var place = LatLng(it.lat, it.lng)
+            map.addMarker(MarkerOptions().position(place).title(it.nom))
+        }
+
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(firstPlace, 13f))
     }
 }

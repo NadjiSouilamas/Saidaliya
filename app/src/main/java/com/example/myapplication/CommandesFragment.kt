@@ -1,14 +1,17 @@
 package com.example.myapplication
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -19,6 +22,7 @@ import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.LocalStorage.RoomService
 import com.example.myapplication.Server.RetrofitService
 import kotlinx.android.synthetic.main.commandes_fragment.*
+import kotlinx.android.synthetic.main.redirection.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +32,8 @@ import java.lang.Exception
 class CommandesFragment : Fragment() {
 
     lateinit var commandeList : List<Commande>
+
+    lateinit var  dialog : Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +49,7 @@ class CommandesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dialog = Dialog(activity)
         // Store all pharmacies in local database
             // retrieve them from server
             // store them in local database
@@ -61,10 +68,18 @@ class CommandesFragment : Fragment() {
             * 2. Display them
             * */
         //}
+        dialog.setContentView(R.layout.redirection)
+
+        val gotoLogin = dialog.findViewById<Button>(R.id.gotoLogin)
 
         if( !MyIdentity.isLoggedIn()){
             findNavController().navigate(R.id.action_commandes_to_login, null)
+            dialog.show()
+            gotoLogin!!.setOnClickListener {
+                dialog.dismiss()
+            }
         }
+
 
         commandes_recycler.layoutManager = LinearLayoutManager(this.activity)
         initializeCommandeFragment()
@@ -72,16 +87,22 @@ class CommandesFragment : Fragment() {
         makeCommandeFAB.setOnClickListener{
             findNavController().navigate(R.id.action_commandes_to_creer_commande, null)
         }
-
-        gotoPharmacie.setOnClickListener{
-            findNavController().navigate(R.id.villes, null)
-        }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.commandes_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+
+    fun showPopup(v: View) {
+        val popup = PopupMenu(this.activity!!, v)
+
+        // This activity implements OnMenuItemClickListener
+        popup.setOnMenuItemClickListener(this as PopupMenu.OnMenuItemClickListener)
+        popup.inflate(R.menu.commandes_menu)
+        popup.show()
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.commandes_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
 
     private fun initializeCommandeFragment(){
         val pharmacie = RoomService.appDatabase.getPharmacieDao().getPharmacie(1)

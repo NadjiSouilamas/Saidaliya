@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -8,15 +10,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.Entity.User
 import com.example.myapplication.Server.RetrofitService
+import kotlinx.android.synthetic.main.popout_register_fragment.*
 import kotlinx.android.synthetic.main.register_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class RegisterFragment : Fragment() {
+
+    lateinit var dialog : Dialog
 
     var nss : Double = 0.0
     var nom = ""
@@ -36,16 +43,22 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         RegisterButton.setOnClickListener {
-            tel = "+213558979648"
-            nom = "SOUILAMAS"
-            prenom = "Amir"
-            adresse = "Blida"
 
             if( checkFields()){
                 var user = User(tel, nss, nom, prenom, 1,adresse)
                 register(user)
             }
         }
+
+        dialog = Dialog(activity)
+        dialog.setContentView(R.layout.popout_register_fragment)
+        val gotoLoginButton = dialog.findViewById<Button>(R.id.returnToLogin)
+
+        gotoLoginButton.setOnClickListener {
+            dialog.dismiss()
+            findNavController().navigateUp()
+        }
+
     }
 
     private fun register(user: User) {
@@ -58,7 +71,7 @@ class RegisterFragment : Fragment() {
 
                 if(response?.isSuccessful!!) {
 
-                    Toast.makeText(this@RegisterFragment.activity,"From isSuccessful", Toast.LENGTH_LONG).show()
+                    dialog.show()
                 }
                 else
                 {
@@ -75,7 +88,22 @@ class RegisterFragment : Fragment() {
     }
 
     private fun checkFields(): Boolean {
-        // TODO Implementation in UI phase
+
+        if(nssField.text.toString() == ""
+            || nameField.text.toString() == ""
+            || firstNameField.text.toString() == ""
+            || addressField.text.toString() == ""
+            || telField.text.toString() == ""){
+
+            Toast.makeText(activity, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        nss = nssField.text.toString().toDouble()
+        nom = nameField.text.toString()
+        prenom = firstNameField.text.toString()
+        adresse = addressField.text.toString()
+        tel = telField.text.toString()
         return true
     }
 }

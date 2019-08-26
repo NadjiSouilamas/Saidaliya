@@ -4,8 +4,10 @@ import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
@@ -17,8 +19,11 @@ import com.example.myapplication.LocalStorage.RoomService
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.proximite_fragment.*
+import android.content.Intent
 
-class MainActivity : AppCompatActivity() {
+
+
+class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -82,5 +87,23 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavMenu(navController: NavController) {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
         bottomNav?.setupWithNavController(navController)
+    }
+
+    fun showPopup(v: View) {
+        val popup = PopupMenu(this, v)
+
+        // This activity implements OnMenuItemClickListener
+        popup.setOnMenuItemClickListener(this as PopupMenu.OnMenuItemClickListener)
+        popup.inflate(R.menu.commandes_menu)
+        popup.show()
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+
+        MyIdentity.clearUserData()
+        val intent = intent
+        finish()
+        startActivity(intent)
+        return true
     }
 }

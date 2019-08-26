@@ -60,6 +60,12 @@ class PharmacieFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        commanderIci.setOnClickListener{
+
+            val nextAction = PharmacieFragmentDirections.actionPharmacieToCreerCommande()
+            nextAction.idPharma = pharmacie.id
+            findNavController().navigate(nextAction, null)
+        }
     }
 
     fun newFacebookIntent(pm: PackageManager, url: String): Intent {

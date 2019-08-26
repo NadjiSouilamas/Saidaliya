@@ -26,20 +26,19 @@
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:hint="Nouveau mot de passe"
             android:layout_marginTop="90dp"
-            android:drawableLeft="@drawable/ic_phone"
+            android:drawableLeft="@drawable/ic_lock"
             android:drawablePadding="10dp"
             android:paddingBottom="10dp"
             android:textColorHint="@color/colorOnPrimary"
             android:backgroundTint="@color/colorOnPrimary"
             app:layout_constraintTop_toBottomOf="@+id/reinitTitle"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="30dp"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="30dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="30dp" android:layout_marginRight="30dp"
+            android:layout_marginEnd="30dp"
             android:fontFamily="@font/comic"
             android:textSize="18dp"
-            android:inputType="phone"
             android:textColor="@color/colorOnPrimary"
-            app:layout_constraintHorizontal_bias="0.0"/>
+            app:layout_constraintHorizontal_bias="0.0" android:inputType="textPassword"/>
 
     <EditText
             android:id="@+id/ConfirmEdit"
@@ -48,7 +47,7 @@
             android:backgroundTint="@color/colorOnPrimary"
             android:layout_width="0dp" android:layout_height="wrap_content"
             android:hint="Confirmer"
-            android:drawableLeft="@drawable/ic_lock"
+            android:drawableLeft="@drawable/ic_confirm"
             android:drawablePadding="10dp"
             android:paddingBottom="10dp"
             android:fontFamily="@font/comic"

@@ -16,6 +16,8 @@
     <fragment android:id="@+id/register" android:name="com.example.myapplication.RegisterFragment"
               android:label="register" tools:layout="@layout/register_fragment">
         <action android:id="@+id/action_register_to_login" app:destination="@id/login"/>
+        <action android:id="@+id/action_register_to_popout_register" app:destination="@+id/popout_register"
+                app:popUpTo="@+id/login"/>
     </fragment>
     <fragment android:id="@+id/reinit" android:name="com.example.myapplication.ReinitFragment"
               android:label="reinit" tools:layout="@layout/reinit_fragment">
@@ -43,7 +45,9 @@
     <fragment android:id="@+id/proximite" android:name="com.example.myapplication.ProximiteFragment"
               android:label="Proximite" tools:layout="@layout/proximite_fragment"/>
     <fragment android:id="@+id/creer_commande" android:name="com.example.myapplication.CreerCommandeFragment"
-              android:label="creer_commande" tools:layout="@layout/creer_commande_fragment"/>
+              android:label="creer_commande" tools:layout="@layout/creer_commande_fragment">
+        <argument android:name="idPharma" app:argType="integer" android:defaultValue="-1"/>
+    </fragment>
     <fragment android:id="@+id/pharmacie" android:name="com.example.myapplication.PharmacieFragment"
               android:label="pharmacie"
               tools:layout="@layout/pharmacie_fragment">
@@ -54,5 +58,10 @@
                 android:defaultValue="0"/>
         <action android:id="@+id/action_pharmacie_to_commandesPharm" app:destination="@id/commandes_pharm"/>
         <action android:id="@+id/action_pharmacie_to_login" app:destination="@id/login"/>
+        <action android:id="@+id/action_pharmacie_to_creer_commande" app:destination="@id/creer_commande"
+                app:popUpTo="@+id/commandes"/>
     </fragment>
+
+    <fragment android:id="@+id/popout_register" android:name="com.example.myapplication.RegisterFragment"
+              android:label="Register successful" tools:layout="@layout/popout_register_fragment"/>
 </navigation>

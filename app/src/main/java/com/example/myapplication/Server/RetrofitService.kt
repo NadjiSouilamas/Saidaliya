@@ -11,7 +11,7 @@ import java.io.IOException
 
 object RetrofitService {
 
-    var adresse = "http://192.168.1.4:8082"
+    var adresse = "http://192.168.43.15:8082"
     var imagesPharmacieAdresse = adresse+"/"
     val endpoint :Endpoint by lazy {
         // TODO : Put base URL
