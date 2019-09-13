@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Adapters.OnItemClickListener
@@ -16,7 +17,11 @@ import com.example.myapplication.Adapters.addOnItemClickListener
 import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.LocalStorage.RoomService
 import com.example.myapplication.R
+import com.example.myapplication.Server.RetrofitService
 import kotlinx.android.synthetic.main.pharmacies_ville_fragment.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PharmaciesVilleFragment : Fragment() {
 
@@ -36,9 +41,9 @@ class PharmaciesVilleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Pharmacie_recycler.layoutManager = LinearLayoutManager(this.activity)
-
         getPharmacies()
+
+        Pharmacie_recycler.layoutManager = LinearLayoutManager(this.activity)
 
         Pharmacie_recycler.addOnItemClickListener(object: OnItemClickListener {
             override fun onItemClicked(position: Int, view: View) {
@@ -103,13 +108,50 @@ class PharmaciesVilleFragment : Fragment() {
         pharmaList = RoomService.appDatabase.getPharmacieDao().getAllPharmacies()
 
         if(pharmaList.size == 0){
-            // TODO : handle case of anonymous user by getting pharmaList from server
+            storePharmaciesInLocal()
         }
+        else{
         // set elements inside spinner
         setSpinnerElements()
         displayPharmaList.addAll(pharmaList)
         pharmaAdapter = PharmaciesAdapter(displayPharmaList)
         Pharmacie_recycler.adapter = pharmaAdapter
+        }
     }
 
+    // Retrieve and store Pharmacies in local
+
+    private fun storePharmaciesInLocal(){
+
+        val call = RetrofitService.endpoint.getPharmacies()
+        call.enqueue(object : Callback<List<Pharmacie>> {
+            override fun onResponse(call: Call<List<Pharmacie>>?, response: Response<List<Pharmacie>>?) {
+
+                if(response?.isSuccessful!!) {
+                    val pharmacies: List<Pharmacie>? = response.body()
+                    pharmaList = pharmacies!!
+                    // Store pharmacies in local
+                    for( pharmacie in pharmacies!!){
+                        RoomService.appDatabase.getPharmacieDao().addPharmacie(pharmacie)
+                        Log.d("MyLog","Pharmacie : "+pharmacie.toString()+" added")
+                    }
+
+                    // set elements inside spinner
+                    setSpinnerElements()
+                    displayPharmaList.addAll(pharmaList)
+                    pharmaAdapter = PharmaciesAdapter(displayPharmaList)
+                    Pharmacie_recycler.adapter = pharmaAdapter
+                }
+                else
+                {
+                    Log.d("Mylog","storePharmaciesLocal : error msg = "+response.toString())
+                    Toast.makeText(this@PharmaciesVilleFragment.activity, "Oops, il y a un problème !", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Pharmacie>>?, t: Throwable?) {
+                Log.d("OnFailure",t.toString())
+                Toast.makeText(this@PharmaciesVilleFragment.activity, "Réseau non disponible !", Toast.LENGTH_SHORT).show()
+            }})
+    }
 }
