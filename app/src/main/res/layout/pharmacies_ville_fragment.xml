@@ -4,7 +4,7 @@
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   tools:context=".PharmaciesVilleFragment"
+                                                   tools:context=".Fragments.PharmaciesVilleFragment"
                                                    android:id="@+id/frameLayout6">
 
     <androidx.appcompat.widget.Toolbar
@@ -14,21 +14,26 @@
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="12dp"
-            android:layout_marginStart="28dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_centerInParent="true"
             android:background="@drawable/border"
-            android:layout_width="wrap_content" android:layout_height="wrap_content" tools:ignore="UselessParent">
+            android:layout_width="match_parent" android:layout_height="wrap_content" tools:ignore="UselessParent">
 
         <Spinner
                 android:id="@+id/villeSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
                 android:popupBackground="@color/colorPrimary"
                 android:backgroundTint="@color/colorOnPrimary"
                 android:overlapAnchor="false"
@@ -36,6 +41,7 @@
                 android:spinnerMode="dropdown"/>
 
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"

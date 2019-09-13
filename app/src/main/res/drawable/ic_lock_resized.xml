@@ -1,0 +1,9 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+            android:drawable="@drawable/ic_lock"
+            android:width="16dp"
+            android:height="16dp"
+    />
+
+</layer-list >

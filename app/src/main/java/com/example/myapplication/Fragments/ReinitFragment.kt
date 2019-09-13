@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.Identity.TelMdp
+import com.example.myapplication.R
 import com.example.myapplication.Server.RetrofitService
 import kotlinx.android.synthetic.main.reinit_fragment.*
 import retrofit2.Call
@@ -43,7 +44,6 @@ class ReinitFragment : Fragment() {
             }
             else
             {
-                //TODO : interact with user to let him know they re not the same
                 Toast.makeText(this@ReinitFragment.activity,"Les deux champs ne correspondent pas", Toast.LENGTH_SHORT).show()
             }
         }
@@ -58,7 +58,6 @@ class ReinitFragment : Fragment() {
             Response<String>?) {
 
                 if(response?.isSuccessful!!) {
-                    Toast.makeText(this@ReinitFragment.activity,"PasswordReinit", Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.action_reinit_to_commandes, null)
                 }
                 else

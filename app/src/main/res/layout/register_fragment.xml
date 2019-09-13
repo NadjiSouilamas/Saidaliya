@@ -4,7 +4,7 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".RegisterFragment" android:id="@+id/frameLayout3">
+                                                   tools:context=".Fragments.RegisterFragment" android:id="@+id/frameLayout3">
 
     <androidx.appcompat.widget.Toolbar android:layout_width="match_parent"
                                        android:layout_height="45dp"
@@ -134,22 +134,25 @@
             app:cornerRadius="20dp"
             android:textSize="14dp"
             android:fontFamily="@font/comic"
-    />
-    <Button
-            android:text="Déjà inscrit ? Se connecter"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/deja_inscrit" android:layout_marginTop="35dp"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterButton" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:backgroundTint="#00000000"
-            android:textSize="8dp"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="@font/comic"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
     />
+  <!--<Button-->
+            <!--android:text="Déjà inscrit ? Se connecter"-->
+            <!--style="@style/Widget.MaterialComponents.Button.UnelevatedButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/deja_inscrit" android:layout_marginTop="35dp"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/RegisterButton" app:layout_constraintStart_toStartOf="parent"-->
+            <!--android:layout_marginLeft="8dp" android:layout_marginStart="8dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--app:backgroundTint="#00000000"-->
+            <!--android:textSize="8dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:fontFamily="@font/comic"-->
+    <!--/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

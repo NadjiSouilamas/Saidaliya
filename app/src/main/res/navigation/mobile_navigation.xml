@@ -4,7 +4,7 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/graphe"
             app:startDestination="@+id/login">
 
-    <fragment android:id="@+id/login" android:name="com.example.myapplication.LoginFragment"
+    <fragment android:id="@+id/login" android:name="com.example.myapplication.Fragments.LoginFragment"
               android:label="login" tools:layout="@layout/login_fragment">
         <action android:id="@+id/action_login_to_register" app:destination="@id/register"/>
         <action android:id="@+id/action_login_to_reinit" app:destination="@id/reinit"/>
@@ -13,42 +13,42 @@
         <action android:id="@+id/action_login_to_villes" app:destination="@id/villes" app:popUpTo="@+id/login"
                 app:popUpToInclusive="true"/>
     </fragment>
-    <fragment android:id="@+id/register" android:name="com.example.myapplication.RegisterFragment"
+    <fragment android:id="@+id/register" android:name="com.example.myapplication.Fragments.RegisterFragment"
               android:label="register" tools:layout="@layout/register_fragment">
         <action android:id="@+id/action_register_to_login" app:destination="@id/login"/>
         <action android:id="@+id/action_register_to_popout_register" app:destination="@+id/popout_register"
                 app:popUpTo="@+id/login"/>
     </fragment>
-    <fragment android:id="@+id/reinit" android:name="com.example.myapplication.ReinitFragment"
+    <fragment android:id="@+id/reinit" android:name="com.example.myapplication.Fragments.ReinitFragment"
               android:label="reinit" tools:layout="@layout/reinit_fragment">
         <action android:id="@+id/action_reinit_to_commandes" app:destination="@id/commandes" app:popUpTo="@+id/login"
                 app:popUpToInclusive="true" app:launchSingleTop="true"/>
     </fragment>
-    <fragment android:id="@+id/commandes" android:name="com.example.myapplication.CommandesFragment"
+    <fragment android:id="@+id/commandes" android:name="com.example.myapplication.Fragments.CommandesFragment"
               android:label="Commandes" tools:layout="@layout/commandes_fragment">
         <action android:id="@+id/action_commandes_to_creer_commande" app:destination="@id/creer_commande"/>
         <action android:id="@+id/action_commandes_to_login" app:destination="@id/login" app:popUpTo="@+id/villes"/>
     </fragment>
     <fragment android:id="@+id/commandes_pharm"
-              android:name="com.example.myapplication.CommandesParPharmacieFragment"
+              android:name="com.example.myapplication.Fragments.CommandesParPharmacieFragment"
               android:label="Commandes_Pharm" tools:layout="@layout/commandes_par_pharmacie_fragment">
         <action android:id="@+id/action_commandesPharm_to_creer_commande" app:destination="@id/creer_commande"/>
     </fragment>
     <fragment android:id="@+id/villes"
-              android:name="com.example.myapplication.PharmaciesVilleFragment"
+              android:name="com.example.myapplication.Fragments.PharmaciesVilleFragment"
               android:label="Villes"
               tools:layout="@layout/pharmacies_ville_fragment">
 
 
         <action android:id="@+id/action_villes_to_pharmacie" app:destination="@id/pharmacie"/>
     </fragment>
-    <fragment android:id="@+id/proximite" android:name="com.example.myapplication.ProximiteFragment"
+    <fragment android:id="@+id/proximite" android:name="com.example.myapplication.Fragments.ProximiteFragment"
               android:label="Proximite" tools:layout="@layout/proximite_fragment"/>
-    <fragment android:id="@+id/creer_commande" android:name="com.example.myapplication.CreerCommandeFragment"
+    <fragment android:id="@+id/creer_commande" android:name="com.example.myapplication.Fragments.CreerCommandeFragment"
               android:label="creer_commande" tools:layout="@layout/creer_commande_fragment">
         <argument android:name="idPharma" app:argType="integer" android:defaultValue="-1"/>
     </fragment>
-    <fragment android:id="@+id/pharmacie" android:name="com.example.myapplication.PharmacieFragment"
+    <fragment android:id="@+id/pharmacie" android:name="com.example.myapplication.Fragments.PharmacieFragment"
               android:label="pharmacie"
               tools:layout="@layout/pharmacie_fragment">
 
@@ -62,6 +62,6 @@
                 app:popUpTo="@+id/commandes"/>
     </fragment>
 
-    <fragment android:id="@+id/popout_register" android:name="com.example.myapplication.RegisterFragment"
+    <fragment android:id="@+id/popout_register" android:name="com.example.myapplication.Fragments.RegisterFragment"
               android:label="Register successful" tools:layout="@layout/popout_register_fragment"/>
 </navigation>

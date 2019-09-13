@@ -1,8 +1,5 @@
-package com.example.myapplication
+package com.example.myapplication.Fragments
 
-import android.content.Context
-import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,18 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.TextView
-import androidx.core.os.bundleOf
-import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapters.OnItemClickListener
 import com.example.myapplication.Adapters.PharmaciesAdapter
 import com.example.myapplication.Adapters.addOnItemClickListener
 import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.LocalStorage.RoomService
-import kotlinx.android.synthetic.main.creer_commande_fragment.*
+import com.example.myapplication.R
 import kotlinx.android.synthetic.main.pharmacies_ville_fragment.*
 
 class PharmaciesVilleFragment : Fragment() {
@@ -99,7 +92,8 @@ class PharmaciesVilleFragment : Fragment() {
                 pharmaVilles.add(pharmacie.ville)
         }
 
-        villeAdapter = ArrayAdapter(this@PharmaciesVilleFragment.activity, R.layout.dropdown_menu_popup_item, pharmaVilles)
+        villeAdapter = ArrayAdapter(this@PharmaciesVilleFragment.activity,
+            R.layout.dropdown_menu_popup_item, pharmaVilles)
         villeSpinner.setAdapter(villeAdapter)
 
     }

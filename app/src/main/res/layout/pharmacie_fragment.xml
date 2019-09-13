@@ -3,7 +3,7 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
                                                    android:layout_height="match_parent"
-                                                   tools:context=".PharmacieFragment" android:id="@+id/frameLayout5">
+                                                   tools:context=".Fragments.PharmacieFragment" android:id="@+id/frameLayout5">
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

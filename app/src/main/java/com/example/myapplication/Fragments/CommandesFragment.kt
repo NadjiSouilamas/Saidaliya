@@ -1,32 +1,26 @@
-package com.example.myapplication
+package com.example.myapplication.Fragments
 
 import android.app.Dialog
-import android.content.Context
-import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.Room
 import com.example.myapplication.Adapters.CommandesAdapter
 import com.example.myapplication.Entity.Commande
 import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.LocalStorage.RoomService
+import com.example.myapplication.R
 import com.example.myapplication.Server.RetrofitService
 import kotlinx.android.synthetic.main.commandes_fragment.*
-import kotlinx.android.synthetic.main.redirection.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
 
 class CommandesFragment : Fragment() {

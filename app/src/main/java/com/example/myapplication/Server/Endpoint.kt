@@ -20,10 +20,6 @@ interface Endpoint {
     @POST("login")
     fun login(@Body telmdp: TelMdp): Call<Identity>
 
-
-    @POST("loginorg")
-    fun loginORG(@Query("tel") tel: String, @Query("mdp") mdp: String): Call<Identity>
-
     @POST("/reinit")
     fun reinit(@Body telmdp: TelMdp): Call<String>
 
@@ -37,14 +33,6 @@ interface Endpoint {
 
     @GET("getpharmacies")
     fun getPharmacies(): Call<List<Pharmacie>>
-
-    // maybe useless
-    @GET("getpharmaciesparville/{ville}")
-    fun getPharmaciesParVille(@Path("ville")ville: String ): Call<List<Pharmacie>>
-
-    // maybe useless
-    @GET("getpharmacie/{id}")
-    fun getPharmacie(@Path("id")id : Int): Call<List<Pharmacie>>
 
     @POST("addcommande")
     fun addCommande(@Body commande: Commande): Call<String>

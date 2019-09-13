@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".PopoutRegisterFragment">
+        tools:context=".Fragments.PopoutRegisterFragment">
 
     <TextView
             android:text="Votre compte a été crée avec succès\nVous pouvez dès à présent vous\nconnectez en utilisant le mot de\npasse qui vous a été envoyé par SMS"

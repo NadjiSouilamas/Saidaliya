@@ -1,24 +1,20 @@
-package com.example.myapplication
+package com.example.myapplication.Fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.myapplication.Adapters.PharmaciesAdapter
 import com.example.myapplication.Entity.Pharmacie
 import com.example.myapplication.LocalStorage.RoomService
 import com.example.myapplication.Server.RetrofitService
 import kotlinx.android.synthetic.main.pharmacie_fragment.*
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.ApplicationInfo
 import android.net.Uri
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.R
 
 
 class PharmacieFragment : Fragment() {
