@@ -70,6 +70,7 @@ class CreerCommandeFragment : Fragment() {
             pharmacieEdit.setText(pharmaList.get(idPharma - 1).nom+" - "+pharmaList.get(idPharma - 1).ville)
         }
 
+
         backUp.setOnClickListener{
             findNavController().navigateUp()
         }
@@ -142,6 +143,12 @@ class CreerCommandeFragment : Fragment() {
 
         nomPharma = part.get(0)
         villePharma = part.get(2) // the pattern is "nom - ville"
+        if(part.size == 4){
+            nomPharma = part.get(0) + " " + part.get(1)
+            villePharma = part.get(3) // the pattern is "nom1 nom2 - ville"
+        }
+        Log.d("NOMPHARMA", nomPharma)
+
         Log.d("Parts", "nom = "+nomPharma+", ville = "+villePharma)
 
         return true

@@ -44,24 +44,6 @@ class CommandesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         dialog = Dialog(activity)
-        // Store all pharmacies in local database
-            // retrieve them from server
-            // store them in local database
-      //  if(//local db is empty){
-            // TODO : Retrieve everything from server and store Pharmacies in local
-            /*
-            * 1. Retrieve pharmacies from Server
-            * 2. Store them in local
-            * 3. Retrieve Commandes from server
-            * 4. Display commandes in recyclerview
-            * */
-        //} else {
-            // TODO : Display commandes ( server access )
-            /*
-            * 1. Access commandes in remote
-            * 2. Display them
-            * */
-        //}
         dialog.setContentView(R.layout.redirection)
 
         val gotoLogin = dialog.findViewById<Button>(R.id.gotoLogin)

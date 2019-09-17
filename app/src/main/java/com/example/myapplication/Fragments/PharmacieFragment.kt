@@ -14,7 +14,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.Identity.MyIdentity
 import com.example.myapplication.R
+import kotlinx.android.synthetic.main.creer_commande_fragment.*
 
 
 class PharmacieFragment : Fragment() {
@@ -33,6 +35,9 @@ class PharmacieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(!MyIdentity.isLoggedIn())
+            commanderIci.visibility = View.GONE
 
         arguments?.let {
             val safeArgs = PharmacieFragmentArgs.fromBundle(it)

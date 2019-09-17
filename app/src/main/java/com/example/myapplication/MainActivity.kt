@@ -106,4 +106,8 @@ class MainActivity : AppCompatActivity(), PopupMenu.OnMenuItemClickListener {
         startActivity(intent)
         return true
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
 }
